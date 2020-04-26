@@ -5,12 +5,15 @@ class Ui {
         products.map((product) => {
             $('#table').append(
             `<tr>
-                <td><a href="#" 
+                <td class="align-middle"><a href="#" 
                        class="text-info h6 item-link collection-item" 
                        data-id="${product.id}">${product.title}
                     </a>
+                    <span class="badge-pill badge-secondary float-right">${product.count}</span>
                 </td>
-                <td>$${product.price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                <td class="align-middle">
+                    $${product.price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                </td>
                 <td class="d-flex justify-content-between">
                     <a href="#" 
                        class="edit btn btn-outline-secondary w-50 mr-1" 

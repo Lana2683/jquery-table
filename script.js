@@ -98,7 +98,7 @@ $('.submit-btn').click(function(e){
         id = e.target.id;
         reg = /^[a-z\d_\.-]+@[a-z\d-]+\.([a-z]{1,6}\.)?[a-z]{2,6}$/i;
         num = /^\d+$/;
-        total = /^[\d]+(\.\d{2})?$/
+        total = /^[\d]+(\.\d{1,2})?$/
     
     //Validation
     if(5 > data.title.length  || data.title.length > 15  || !data.title.trim()||data.title === '') {
@@ -205,7 +205,18 @@ $('#select-all').change(function(e) {
 });
 
 //FILTER PRODUCTS
+$('#filter-text').keypress(function(event){
+    let keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13'){
+        filterProducts() 
+    }
+});
+
 $('#filter').click(function(){
+    filterProducts() 
+})
+
+function filterProducts(){
     const text = $('#filter-text').val().toLowerCase()
     document.querySelectorAll('.collection-item').forEach(function(name){
     const item = name.textContent;
@@ -214,9 +225,8 @@ $('#filter').click(function(){
     } else {
         name.parentElement.parentElement.style.display = 'none';
     }
-})
-
-})
+    }) 
+}
 
 //SORT BY A-Z
 $("#sort-a-z").click(function (e) {
