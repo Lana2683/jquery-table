@@ -5,14 +5,15 @@ class Ui {
         products.map((product) => {
             $('#table').append(
             `<tr>
-                <td class="align-middle"><a href="#" 
+                <td class="align-middle">
+                    <a href="#" 
                        class="text-info h6 item-link collection-item" 
                        data-id="${product.id}">${product.title}
                     </a>
                     <span class="badge-pill badge-secondary float-right">${product.count}</span>
                 </td>
                 <td class="align-middle">
-                    $${product.price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    $${String(product.price).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </td>
                 <td class="d-flex justify-content-between">
                     <a href="#" 
@@ -59,7 +60,7 @@ class Ui {
 
     fillFields(data) {
         $('#title').val(data.title);
-        $('#price').val("$" + data.price.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        $('#price').val("$" + String(data.price).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
         $('#email').val(data.email);
         $('#count').val(data.count);
     }

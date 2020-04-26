@@ -19,7 +19,7 @@
     <div class="container w-50">
         <header class="d-flex justify-content-between">
             <div class="input-group mb-3 mt-3 w-50">
-                <input class="form-control mr-3" type="text" placeholder="Find By Name..." id="filter-text">
+                <input class="form-control mr-3" type="text" placeholder="Enter product name..." id="filter-text">
                 <button class="btn btn-secondary w-25" type="button" id="filter">
                     Search   
                 </button>
@@ -30,8 +30,8 @@
             <table class="table table-bordered" id="products">
                 <thead class="text-info">
                     <tr>
-                        <th class="sort sort-by-name sort" id="sort-a-z"><span>Name</span></th>
-                        <th class="sort sort-by-price sort" id="sort-0-9"><span>Price</span></th>
+                        <th class="sort sort-by-name" id="sort-a-z">Name</th>
+                        <th class="sort sort-by-price" id="sort-0-9">Price</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -47,7 +47,7 @@
                     </button>
                 </div>
                 <div class="modal-body text-center">
-                    <span>Are you sure you want delete <span id="del-modal-header"></span>?</span>
+                    <span>Are you sure you want to delete <span id="del-modal-header"></span>?</span>
                 </div>
                 <div class="d-flex justify-content-around mb-2">
                     <button type="button" class="btn btn-secondary w-25 yes" data-dismiss="modal">Yes</button>
@@ -65,29 +65,29 @@
                 </div>
                 <form class="modal-body" id="productForm">
                     <div class="form-group w-75">
-                        <label class="col-form-label" for="title">Name</label>
+                        <label class="col-form-label" for="title">Name:</label>
                         <input type="text" class="form-control" placeholder="Product name" id="title">
                         <div class="invalid-feedback">
                             The name should be 5-15 characters long.
                         </div>
                     </div>
                     <div class="form-group w-75">
-                        <label class="col-form-label" for="email">Email</label>
-                        <input type="text" class="form-control" placeholder="Default input" id="email">
+                        <label class="col-form-label" for="email">Supplier email:</label>
+                        <input type="text" class="form-control" placeholder="Email" id="email">
                         <div class="invalid-feedback">
                             Please enter valid Email.
                         </div>
                     </div>
                     <div class="form-group w-50">
-                        <label class="col-form-label" for="count">Count</label>
-                        <input type="text" class="form-control" placeholder="Default input" id="count">
+                        <label class="col-form-label" for="count">Count:</label>
+                        <input type="text" class="form-control" placeholder="Count" id="count">
                         <div class="invalid-feedback">
                             This field is required.
                         </div>
                     </div>
                     <div class="form-group w-75">
-                        <label class="col-form-label" for="price">Price</label>
-                        <input type="text" class="form-control"  placeholder="Default input" id="price">
+                        <label class="col-form-label" for="price">Price:</label>
+                        <input type="text" class="form-control"  placeholder="Price" id="price">
                         <div class="invalid-feedback">
                             This field is required.
                         </div>

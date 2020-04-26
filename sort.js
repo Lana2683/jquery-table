@@ -12,10 +12,12 @@ class Sort {
 
         ui.showProducts(products);
         if($(".fa-caret-up")){
-            $(".fa-caret-up").replaceWith("<i class='fas fa-caret-down float-right mt-1'>");
+            $(".fa-caret-up").replaceWith("<i class='fas fa-caret-down float-right mt-1 text-secondary'>");
             $("#sort-a-z").removeClass('sort-by-name').addClass('down');
         }
-        $("#sort-a-z").removeClass('sort-by-name').append("<i class='fas fa-caret-down float-right mt-1'>").addClass('down');
+        $("#sort-a-z").removeClass('sort-by-name')
+                      .append("<i class='fas fa-caret-down float-right mt-1 text-secondary'>")
+                      .addClass('down');
     }
 
     byZA(products){
@@ -29,7 +31,7 @@ class Sort {
         })
 
         ui.showProducts(products)
-        $(".fa-caret-down").replaceWith("<i class='fas fa-caret-up float-right mt-1'>");
+        $(".fa-caret-down").replaceWith("<i class='fas fa-caret-up float-right mt-1 text-secondary'>");
         $("#sort-a-z").removeClass('down').addClass('up');
     }
 
@@ -45,10 +47,12 @@ class Sort {
 
         ui.showProducts(products)
         if($(".fa-caret-up")){
-            $(".fa-caret-up").replaceWith("<i class='fas fa-caret-down float-right mt-1'>");
+            $(".fa-caret-up").replaceWith("<i class='fas fa-caret-down float-right mt-1 text-secondary'>");
             $("#sort-0-9").removeClass('sort-by-price').addClass('down');
         }
-        $("#sort-0-9").removeClass('sort-by-price').append("<i class='fas fa-caret-down float-right mt-1'>").addClass('down');
+        $("#sort-0-9").removeClass('sort-by-price')
+                      .append("<i class='fas fa-caret-down float-right mt-1 text-secondary'>")
+                      .addClass('down');
     }
 
     byDecrease(products){
@@ -62,7 +66,7 @@ class Sort {
         })
 
         ui.showProducts(products)
-        $(".fa-caret-down").replaceWith("<i class='fas fa-caret-up float-right mt-1'>");
+        $(".fa-caret-down").replaceWith("<i class='fas fa-caret-up float-right mt-1 text-secondary'>");
         $("#sort-0-9").removeClass('down').addClass('up');
     }
 }

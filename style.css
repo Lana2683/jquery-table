@@ -32,3 +32,7 @@
 .sort:hover {
   background-color: rgba(0,0,0,0.1);
 }
+
+.fa-caret-down, .fa-caret-up {
+  pointer-events: none;
+}

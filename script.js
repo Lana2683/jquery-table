@@ -32,28 +32,27 @@ function showProduct(data, id){
     $("#content").show();
     $('.submit-btn').attr('id', id)
     ui.fillFields(data);
-    $('#price').focusout(function() {
-       
-        // this.value = this.value.replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
-        if (this.value.indexOf("$") != 0)
-   {
-    this.value = this.value.replace(/ ^[$]/g,"");
-    this.value = "$" + this.value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-   }
-
-    })
-    $('#price').focus(function() {
-        this.value=this.value.replace(/[\$\s,]/g, '')
-    })
 }
+
+$('#price').focusout(function() {
+    if (this.value.indexOf("$") != 0)
+{
+this.value = this.value.replace(/ ^[$]/g,"");
+this.value = "$" + this.value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+})
+$('#price').focus(function() {
+    this.value=this.value.replace(/[\$\s,]/g, '')
+})
 ;
 
 // SHOW CONFIRM BEFORE DELETE ITEM
 $("#table").click(function(e){
     if(e.target.classList.contains('delete')) {
     const id = e.target.dataset.id,
-          name = e.target.parentElement.previousElementSibling.previousElementSibling.textContent;
-
+          name = e.target.parentElement.previousElementSibling.previousElementSibling.children[0].textContent
+        console.log(name)
         $("#del-modal-header").text(name);
         $('.yes').attr('data-id', id)
         $("#delete-modal").show();
@@ -89,17 +88,17 @@ $("#no").click(function(){
 $('.submit-btn').click(function(e){
     e.preventDefault();
     ui.changeInputClass()
+    const parcePrice = $('#price').val().replace(/[\$\s,]/g, '');
     const data = {
         title: $('#title').val(),
         email: $('#email').val(),
         count: $('#count').val(),
-        price: $('#price').val().replace(/[\$\s,]/g, '')
+        price: parcePrice
         }
         id = e.target.id;
         reg = /^[a-z\d_\.-]+@[a-z\d-]+\.([a-z]{1,6}\.)?[a-z]{2,6}$/i;
         num = /^\d+$/;
         total = /^[\d]+(\.\d{1,2})?$/
-    
     //Validation
     if(5 > data.title.length  || data.title.length > 15  || !data.title.trim()||data.title === '') {
         $("#title").addClass("is-invalid").focus();
@@ -117,7 +116,8 @@ $('.submit-btn').click(function(e){
         $('#title').is( ":focus" )||$('#email').is( ":focus" )||$('#count').is( ":focus" )?null:$('#price').focus()
     }
     else if(!$("#productForm input").hasClass("is-invalid")) {
-
+        parseFloat(parcePrice).toFixed(2)
+        data.price = parseFloat(parcePrice);
     //Add new product
     if(id === '') {
         ui.clearFields();
@@ -233,18 +233,20 @@ $("#sort-a-z").click(function (e) {
     $("#sort-0-9 .fa-caret-up, #sort-0-9 .fa-caret-down").remove();
     $("#sort-0-9").removeClass('up, down').addClass('sort-by-price')
     if(e.target.classList.contains('sort-by-name')){
-    http.get('http://localhost:3000/products', 0)
-    .then(data => sort.byAZ(data))
-    .catch(err => console.log(err))
+        http.get('http://localhost:3000/products', 0)
+            .then(data => sort.byAZ(data))
+            .catch(err => console.log(err))
     }
     else if(e.target.classList.contains('down')){
         http.get('http://localhost:3000/products', 0)
-    .then(data => sort.byZA(data))
-    .catch(err => console.log(err))
+            .then(data => sort.byZA(data))
+            .catch(err => console.log(err))
     } else {
         $(".fa-caret-up").remove();
         $("#sort-a-z").removeClass('up').addClass('sort-by-name')
-        getProducts()
+        http.get('http://localhost:3000/products', 0)
+            .then(data => ui.showProducts(data))
+            .catch(err => console.log(err))
     }
 });
 
@@ -252,18 +254,20 @@ $("#sort-0-9").click(function (e) {
     $("#sort-a-z .fa-caret-up, #sort-a-z .fa-caret-down").remove();
     $("#sort-a-z").removeClass('up, down').addClass('sort-by-name')
     if(e.target.classList.contains('sort-by-price')){
-    http.get('http://localhost:3000/products', 0)
-    .then(data => sort.byIncrease(data))
-    .catch(err => console.log(err))
+        http.get('http://localhost:3000/products', 0)
+            .then(data => sort.byIncrease(data))
+            .catch(err => console.log(err))
     }
     else if(e.target.classList.contains('down')){
         http.get('http://localhost:3000/products', 0)
-    .then(data => sort.byDecrease(data))
-    .catch(err => console.log(err))
+            .then(data => sort.byDecrease(data))
+            .catch(err => console.log(err))
     } else {
         $(".fa-caret-up").remove();
         $("#sort-0-9").removeClass('up').addClass('sort-by-price')
-        getProducts()
+        http.get('http://localhost:3000/products', 0)
+            .then(data => ui.showProducts(data))
+            .catch(err => console.log(err))
     }
 });
 
