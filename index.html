@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" 
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+          crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">  -->
+    <link rel="stylesheet" 
+          href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" 
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" 
+          crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+    <title>Table</title>
+</head>
+<body>
+    <div class="container w-50">
+        <header class="d-flex justify-content-between">
+            <div class="input-group mb-3 mt-3 w-50">
+                <input class="form-control mr-3" type="text" placeholder="Find By Name..." id="filter-text">
+                <button class="btn btn-secondary w-25" type="button" id="filter">
+                    Search   
+                </button>
+            </div>
+            <button class="btn btn-info mt-3 mb-3" type="button" id="add">Add new</button>
+        </header>
+        <div>
+            <table class="table table-bordered" id="products">
+                <thead class="text-info">
+                    <tr>
+                        <th class="sort-by-name sort" id="sort-a-z">Name</th>
+                        <th class="sort-by-price sort" id="sort-0-9">Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="table"></tbody>
+            </table>
+        </div>
+        <div class="fixed-top pt-3 delete-modal" id="delete-modal">
+            <div class="modal-content w-25 m-auto ">
+                <div class="modal-header">
+                    <h5 class="modal-title">Are you sure?</h5>
+                    <button type="button" class="close" id="close-delete-modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <span>Are you sure you want delete <span id="del-modal-header"></span>?</span>
+                </div>
+                <div class="d-flex justify-content-around mb-2">
+                    <button type="button" class="btn btn-secondary w-25 yes" data-dismiss="modal">Yes</button>
+                    <button type="button" class="btn btn-primary w-25" id="no">No</button>
+                </div>
+            </div>
+        </div>
+        <div class="fixed-top pt-3 content" id="content">
+            <div class="modal-content w-50 m-auto">
+                <div class="modal-header">
+                    <h5>Product Name</h5>
+                    <button type="button" class="close" id="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="modal-body" id="productForm">
+                    <div class="form-group w-75">
+                        <label class="col-form-label" for="title">Name</label>
+                        <input type="text" class="form-control" placeholder="Product name" id="title">
+                        <div class="invalid-feedback">
+                            The name should be 5-15 characters long.
+                        </div>
+                    </div>
+                    <div class="form-group w-75">
+                        <label class="col-form-label" for="email">Email</label>
+                        <input type="text" class="form-control" placeholder="Default input" id="email">
+                        <div class="invalid-feedback">
+                            Please enter valid Email.
+                        </div>
+                    </div>
+                    <div class="form-group w-50">
+                        <label class="col-form-label" for="count">Count</label>
+                        <input type="text" class="form-control" placeholder="Default input" id="count">
+                        <div class="invalid-feedback">
+                            This field is required.
+                        </div>
+                    </div>
+                    <div class="form-group w-75">
+                        <label class="col-form-label" for="price">Price</label>
+                        <input type="text" class="form-control"  placeholder="Default input" id="price">
+                        <div class="invalid-feedback">
+                            This field is required.
+                        </div>
+                    </div>
+                    <label class="form-control-label" id="label-delivery">Delivery:</label>
+                    <div class="d-flex"> 
+                        <select class="custom-select delivery w-25 mr-3">
+                            <option selected="" id="select-country">Select country</option>
+                            <option value="1" id="russia">Russia</option>
+                            <option value="2" id="belarus">Belarus</option>
+                            <option value="3" id="usa">USA</option>
+                        </select>
+                        <div class="w-25 card pl-2 cities-body">
+                            <div class="card-body cities" id="cities">
+                                <input class="form-check-input" type="checkbox" id="select-all" value="option1">
+                                <label class="form-check-label" for="select-all">Select all</label>
+                                <div role="separator" class="dropdown-divider"></div>
+                                <div class="checkboxes">
+                                    <input class="form-check-input" type="checkbox" id="first-city" value="option1">
+                                    <label class="form-check-label" for="first-city" id="city1"></label>
+                                    <br>
+                                    <input class="form-check-input" type="checkbox" id="second-city" value="option1">
+                                    <label class="form-check-label" for="second-city" id="city2"></label>
+                                    <br>
+                                    <input class="form-check-input" type="checkbox" id="
+                                    third-city" value="option1">
+                                    <label class="form-check-label" for="third-city" id="city3"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <button class="btn btn-outline-secondary submit-btn">Save</button>
+                    <button class="btn btn-warning mt-3 mb-3" type="button" id="cancel">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+ 
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
+        crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
+        crossorigin="anonymous">
+</script>
+
+<script src="ui.js"></script>
+<script src="http.js"></script>
+<script src="sort.js"></script>
+<script src="script.js"></script> 
+
+</body>
+</html>
