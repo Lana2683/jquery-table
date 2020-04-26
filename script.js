@@ -223,12 +223,12 @@ $("#sort-a-z").click(function (e) {
     $("#sort-0-9 .fa-caret-up, #sort-0-9 .fa-caret-down").remove();
     $("#sort-0-9").removeClass('up, down').addClass('sort-by-price')
     if(e.target.classList.contains('sort-by-name')){
-    http.get('http://localhost:3000/products', 500)
+    http.get('http://localhost:3000/products', 0)
     .then(data => sort.byAZ(data))
     .catch(err => console.log(err))
     }
     else if(e.target.classList.contains('down')){
-        http.get('http://localhost:3000/products', 500)
+        http.get('http://localhost:3000/products', 0)
     .then(data => sort.byZA(data))
     .catch(err => console.log(err))
     } else {
@@ -242,12 +242,12 @@ $("#sort-0-9").click(function (e) {
     $("#sort-a-z .fa-caret-up, #sort-a-z .fa-caret-down").remove();
     $("#sort-a-z").removeClass('up, down').addClass('sort-by-name')
     if(e.target.classList.contains('sort-by-price')){
-    http.get('http://localhost:3000/products', 500)
+    http.get('http://localhost:3000/products', 0)
     .then(data => sort.byIncrease(data))
     .catch(err => console.log(err))
     }
     else if(e.target.classList.contains('down')){
-        http.get('http://localhost:3000/products', 500)
+        http.get('http://localhost:3000/products', 0)
     .then(data => sort.byDecrease(data))
     .catch(err => console.log(err))
     } else {
