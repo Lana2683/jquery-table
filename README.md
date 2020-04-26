@@ -1,5 +1,9 @@
 ## jQuery-table
-
-## Deadline 26.04 EOD
-
-#### Description of the task can be found in uploaded pdf
+### USAGE:
+```
+git clone https://github.com/Lana2683/jquery-table.git
+cd jquery-table
+npm install -g json-server
+json-server --watch doc.json
+start index.html
+```
