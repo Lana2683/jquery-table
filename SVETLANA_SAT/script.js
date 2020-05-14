@@ -1,13 +1,13 @@
-const http = new Http,
-      ui = new Ui,
-      sort = new Sort;
+HTTP = new Http;
+UI = new Ui;
+SORT = new Sort;
 
 $(document).ready(() => getProducts())
 
 //GET PRODUCTS
 function getProducts() {
-    http.get('http://localhost:3000/products', 500)
-        .then(data => ui.showProducts(data))
+    HTTP.get('http://localhost:3000/products', 500)
+        .then(data => UI.showProducts(data))
         .catch(err => console.log(err))
 }
 
@@ -23,7 +23,7 @@ $("#table").click(function(e){
     const id = e.target.dataset.id;
     
     if(e.target.classList.contains('edit')) {
-        http.get(`http://localhost:3000/products/${id}`, 500)
+        HTTP.get(`http://localhost:3000/products/${id}`, 500)
         .then(data => showProduct(data, id))
         .catch(err => console.log(err)) 
     }
@@ -31,7 +31,7 @@ $("#table").click(function(e){
 function showProduct(data, id){
     $("#content").show();
     $('.submit-btn').attr('id', id)
-    ui.fillFields(data);
+    UI.fillFields(data);
 }
 
 $('#price').focusout(function() {
@@ -69,8 +69,8 @@ $('.yes').click(function(e) {
   })
   
 function  deleleProduct(url, name) {
-    ui.showAlert(`${name} removed`, 'alert alert-success')
-    http.delete(url, 1000)
+    UI.showAlert(`${name} removed`, 'alert alert-success')
+    HTTP.delete(url, 1000)
         .then(data => getProducts())
         .catch(err => console.log(err))
         $("#delete-modal").hide();
@@ -87,7 +87,7 @@ $("#no").click(function(){
 //SUBMIT NEW PRODUCT OR UPDATE PRODUCT
 $('.submit-btn').click(function(e){
     e.preventDefault();
-    ui.changeInputClass()
+    UI.changeInputClass()
     const parcePrice = $('#price').val().replace(/[\$\s,]/g, '');
     const data = {
         title: $('#title').val(),
@@ -120,17 +120,17 @@ $('.submit-btn').click(function(e){
         data.price = parseFloat(parcePrice);
     //Add new product
     if(id === '') {
-        ui.clearFields();
-        ui.showAlert(`${data.title} added`, 'alert alert-success');
-        http.post('http://localhost:3000/products',1000, data)
+        UI.clearFields();
+        UI.showAlert(`${data.title} added`, 'alert alert-success');
+        HTTP.post('http://localhost:3000/products',1000, data)
     .then( data => getProducts())
     .catch(err => console.log(err))
     } else {
     //Or
     //Update product
-        ui.clearFields()
-        ui.showAlert(`${data.title} updated`, 'alert alert-success');
-        http.put(`http://localhost:3000/products/${id}`,1000, data)
+        UI.clearFields()
+        UI.showAlert(`${data.title} updated`, 'alert alert-success');
+        HTTP.put(`http://localhost:3000/products/${id}`,1000, data)
         .then(data => {
             getProducts();
             $('.submit-btn').attr('id', '')})
@@ -143,8 +143,8 @@ $('.submit-btn').click(function(e){
 $("#table").click(function(e){
     const id=e.target.dataset.id
     if(e.target.classList.contains('item-link')) {
-        http.get(`http://localhost:3000/products/${id}`, 500)
-        .then(data => {ui.fillFields(data); 
+        HTTP.get(`http://localhost:3000/products/${id}`, 500)
+        .then(data => {UI.fillFields(data); 
             $("#content").show();
             $(".delivery,#label-delivery, .submit-btn, #cancel, .cities-body").hide();
             $("#productForm input").attr('readonly', true)
@@ -158,13 +158,13 @@ $("#table").click(function(e){
 
 //CLOSE MODAL OR CANCEL CHANGES
 $("#close").click(function(){
-    ui.clearFields()
-    ui.changeInputClass()
+    UI.clearFields()
+    UI.changeInputClass()
 });
 
 $("#cancel").click(function(){
-    ui.clearFields()
-    ui.changeInputClass()
+    UI.clearFields()
+    UI.changeInputClass()
 });
 
 
@@ -233,19 +233,19 @@ $("#sort-a-z").click(function (e) {
     $("#sort-0-9 .fa-caret-up, #sort-0-9 .fa-caret-down").remove();
     $("#sort-0-9").removeClass('up, down').addClass('sort-by-price')
     if(e.target.classList.contains('sort-by-name')){
-        http.get('http://localhost:3000/products', 0)
-            .then(data => sort.byAZ(data))
+        HTTP.get('http://localhost:3000/products', 0)
+            .then(data => SORT.byAZ(data))
             .catch(err => console.log(err))
     }
     else if(e.target.classList.contains('down')){
-        http.get('http://localhost:3000/products', 0)
-            .then(data => sort.byZA(data))
+        HTTP.get('http://localhost:3000/products', 0)
+            .then(data => SORT.byZA(data))
             .catch(err => console.log(err))
     } else {
         $(".fa-caret-up").remove();
         $("#sort-a-z").removeClass('up').addClass('sort-by-name')
-        http.get('http://localhost:3000/products', 0)
-            .then(data => ui.showProducts(data))
+        HTTP.get('http://localhost:3000/products', 0)
+            .then(data => UI.showProducts(data))
             .catch(err => console.log(err))
     }
 });
@@ -254,19 +254,19 @@ $("#sort-0-9").click(function (e) {
     $("#sort-a-z .fa-caret-up, #sort-a-z .fa-caret-down").remove();
     $("#sort-a-z").removeClass('up, down').addClass('sort-by-name')
     if(e.target.classList.contains('sort-by-price')){
-        http.get('http://localhost:3000/products', 0)
-            .then(data => sort.byIncrease(data))
+        HTTP.get('http://localhost:3000/products', 0)
+            .then(data => SORT.byIncrease(data))
             .catch(err => console.log(err))
     }
     else if(e.target.classList.contains('down')){
-        http.get('http://localhost:3000/products', 0)
-            .then(data => sort.byDecrease(data))
+        HTTP.get('http://localhost:3000/products', 0)
+            .then(data => SORT.byDecrease(data))
             .catch(err => console.log(err))
     } else {
         $(".fa-caret-up").remove();
         $("#sort-0-9").removeClass('up').addClass('sort-by-price')
-        http.get('http://localhost:3000/products', 0)
-            .then(data => ui.showProducts(data))
+        HTTP.get('http://localhost:3000/products', 0)
+            .then(data => UI.showProducts(data))
             .catch(err => console.log(err))
     }
 });

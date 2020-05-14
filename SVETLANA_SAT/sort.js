@@ -10,7 +10,7 @@ class Sort {
             }
         })
 
-        ui.showProducts(products);
+        UI.showProducts(products);
         if($(".fa-caret-up")){
             $(".fa-caret-up").replaceWith("<i class='fas fa-caret-down float-right mt-1 text-secondary'>");
             $("#sort-a-z").removeClass('sort-by-name').addClass('down');
@@ -30,7 +30,7 @@ class Sort {
             }
         })
 
-        ui.showProducts(products)
+        UI.showProducts(products)
         $(".fa-caret-down").replaceWith("<i class='fas fa-caret-up float-right mt-1 text-secondary'>");
         $("#sort-a-z").removeClass('down').addClass('up');
     }
@@ -45,7 +45,7 @@ class Sort {
             }
         })
 
-        ui.showProducts(products)
+        UI.showProducts(products)
         if($(".fa-caret-up")){
             $(".fa-caret-up").replaceWith("<i class='fas fa-caret-down float-right mt-1 text-secondary'>");
             $("#sort-0-9").removeClass('sort-by-price').addClass('down');
@@ -65,7 +65,7 @@ class Sort {
             }
         })
 
-        ui.showProducts(products)
+        UI.showProducts(products)
         $(".fa-caret-down").replaceWith("<i class='fas fa-caret-up float-right mt-1 text-secondary'>");
         $("#sort-0-9").removeClass('down').addClass('up');
     }
